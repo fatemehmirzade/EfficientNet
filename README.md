@@ -1,18 +1,58 @@
-# EfficientNet
-The presented code herein implements the algorithm outlined in the article titled "Automated Diagnosis of Pneumonia from Classification of Chest X-Ray Images using EfficientNet," with a specific focus on the following key aspects:
+## Introduction
+This work implements the algorithm presented in the paper titled "Automated Diagnosis of Pneumonia from Classification of Chest X-Ray Images using EfficientNet," with regard to application according to the EfficientNet architecture in pneumonia diagnosis using chest X-ray images.
 
-EfficientNet Architecture: EfficientNet is a family of CNNs designed to billions of FLOPS, attaining state-of-the-art performance. The architecture is grounded in a compound scaling methodology that involves the balanced and of dimensions of depth, width, and resolution with a set of predetermined scaling coefficients. Accordingly, EfficientNet can well balance network accuracy and computational efficiency, much better than many recently designed CNN models on most benchmarking scenarios.
+## Data Ingestion and Preprocessing
+This dataset contains chest X-ray images from multiple clinical and experimental sources. Thus, variability in characteristics or image qualities has been added. The first preprocessing steps were as follows:
+Exploratory Data Analysis (EDA): Conducted to understand the dataset's basic attributes and distribution patterns.
+Data Cleaning: This is done in order to get rid of noise and extraneous data, thus increasing the efficiency of the training model.
+Class imbalance mitigation: This was attained via oversampling of the minority classes or undersampling of the majority.
+Data Augmentation: Synthetic augmentation of dataset through variations in images by means of operations like rotation, flipping, and scaling.
+
+![image](https://github.com/user-attachments/assets/041dd37a-0af5-4070-9d89-cbb505a28f25)
+|:-:|
+|An image of one of the dataset samples with PNEUMONIA
+
+!![image](https://github.com/user-attachments/assets/f6e56c7b-e6c5-4753-b5b8-ec2ea474e76d)
+|:-:|
+|Augmented data
+
+## Hyperparameters and Training
+For the purpose of this study, a family of CNNs called EfficientNet was chosen; it is designed to achieve an optimal balance between network accuracy and computational efficiency. Variant EfficientNet-B0 was chosen as the use case in view of the dataset size and availability of computational resources. The training involved:
+Model selection: EfficientNet was selected for its established performance and computational efficiency.
+
+![image](https://github.com/user-attachments/assets/0bc40425-fcd3-47e9-bb8b-a801708b386e)
+|:-:|
+|EfficientNet Architecture
+
+Initial Training: The top EfficientNet trained on ImageNet served as the initialization.
+Tuning: In this process, changes in the pre-trained model were fitted on the chest X-ray dataset. The concept of transfer learning here included freezing the first layer, which had preserved learned features, while latter layers were required to train further towards adaptation for features specific to the newly provided dataset of pneumonia.
 
 
-The variant used in this research for EfficientNet, normally denoted from EfficientNet-B0 to EfficientNet-B7, provides a spectrum of sizes with increasing complexities. Every next iteration increases in size and improves according to accuracy, so EfficientNet-B0 is the smallest and most resource-efficient variant. For choosing the right variant for this study, dataset scale and available computational resources were taken into consideration.
+## Evaluation Metrics and Results
+The different metrics for which the performance was evaluated of the EfficientNet model were:
 
-Methodology:
+Accuracy: This is the measure of how correct pneumonia identification is for the proportion of cases against the total number.
 
-Data Ingestion and Preprocessing: The dataset consists of chest X-ray images from multiple clinical and experimental sources; hence variability in image qualities and characteristics is added. Initial steps on the preprocessing front were: EDA—Exploratory Data Analysis: this was where in-depth analysis had been done to understand the basic attributes of the dataset and distribution patterns. Data Cleaning: This was done to remove noise and extraneous data, which help to enhance the training model's effectiveness. Class Imbalance Mitigation: These are techniques that should ensure class balance, such as oversampling the minority classes or undersampling the majority. Data Augmentation: A subset of methods in which a dataset is synthetically augmented by creating image variations through different operations, such as rotation, flipping, and scaling. Transfer Learning and Fine-tuning: The process of transfer learning involves the use of a model pre-trained on a large dataset and fine-tuning it on a target task, in this case, detecting pneumonia. This process entails: Model Selection: Opting for EfficientNet due to its established performance and computational efficiency. Initial Training: Utilizing the EfficientNet model pre-trained on the ImageNet dataset as the initial starting point. Fine-Tuning: Making necessary adjustments to the pre-trained model to align it with the chest X-ray dataset. This entails freezing the initial layers of the network to preserve learned features while training the latter layers on the new dataset to adapt to pneumonia-specific features. Model Evaluation: The performance of the EfficientNet model underwent comprehensive evaluation utilizing various metrics, including: Accuracy: Reflecting the proportion of correctly identified pneumonia cases relative to the total cases. Area Under the Curve (AUC): Quantifying the model's ability to discriminate between positive and negative cases. Precision, Recall, and F1 Score: Offering nuanced insights into the model's precision, recall, and overall balance between the two through the harmonic mean of precision and recall (F1 score).
-The ensuing results are delineated as follows:
+AUC: This quantifies a model's performance in classifying positive versus negative cases.
 
-![image](https://github.com/fmirzadeh99/EfficientNet/assets/169579231/59ca16c2-a535-46d1-ad1e-94e2faeef8c3)
+Precision, Recall, F1 Score: All of these provide nuanced insight into a model's performance, where precision indicates the correctness of the positive predictions, recall reflects the model's ability to identify all positive cases, and the F1 score provides a balance between precision and recall.
 
-![image](https://github.com/fmirzadeh99/EfficientNet/assets/169579231/312ed42c-85f5-4632-8b2b-df98ec8ab2c9)
+## Results
+The EfficientNet model demonstrated very high accuracy and strong performance in all evaluation metrics. The literature has proven the efficiency of this architecture in diagnosing pneumonia from chest X-ray images. In details:
+Accuracy: 0.85666 
 
-![image](https://github.com/fmirzadeh99/EfficientNet/assets/169579231/0baee230-bb32-42a7-94b3-a7b449096570)
+![image](https://github.com/user-attachments/assets/24da41f0-0706-4fdc-a4d4-9726b126de5d)
+|:-:|
+|Confusion Matrix
+
+![image](https://github.com/user-attachments/assets/a06995e9-9300-44f6-9b84-da017ac2e550)
+|:-:|
+|ROC curve
+
+Precision: 0.96
+
+Recall: 0.83
+
+F1 Score: 0.89
+
+These results show that the model has highly efficient performance in classifying the presence of pneumonia on chest radiographs, hence validating EfficientNet for medical image classification tasks.
